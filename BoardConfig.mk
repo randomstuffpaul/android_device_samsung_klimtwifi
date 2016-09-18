@@ -90,6 +90,9 @@ BOARD_USE_BGRA_8888 := true
 # Exynos display
 BOARD_USES_VIRTUAL_DISPLAY := true
 
+# Force screen to cpu
+TARGET_FORCE_SCREENSHOT_CPU_PATH := true
+
 # HWCServices
 BOARD_USES_HWC_SERVICES := true
 

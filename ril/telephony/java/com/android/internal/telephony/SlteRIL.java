@@ -22,6 +22,7 @@ import android.content.Context;
 import android.telephony.Rlog;
 import android.os.Message;
 import android.os.Parcel;
+import android.os.SystemProperties;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.SignalStrength;
 import android.telephony.SmsManager;
@@ -57,6 +58,11 @@ public class SlteRIL extends RIL {
     private static final int RIL_REQUEST_SIM_TRANSMIT_CHANNEL = 10029;
 
     private Message mPendingGetSimStatus;
+
+    // Number of per-network elements expected in QUERY_AVAILABLE_NETWORKS's response.
+    // 4 elements is default, but many RILs actually return 5, making it impossible to
+    // divide the response array without prior knowledge of the number of elements.
+    protected int mQANElements = SystemProperties.getInt("ro.ril.telephony.mqanelements", 4);
 
     public SlteRIL(Context context, int preferredNetworkType, int cdmaSubscription) {
         super(context, preferredNetworkType, cdmaSubscription, null);
@@ -220,6 +226,7 @@ public class SlteRIL extends RIL {
     protected Object
     responseCallList(Parcel p) {
         int num;
+		int voiceSettings;
         ArrayList<DriverCall> response;
         DriverCall dc;
 
@@ -240,7 +247,8 @@ public class SlteRIL extends RIL {
             dc.isMpty = (0 != p.readInt());
             dc.isMT = (0 != p.readInt());
             dc.als = p.readInt();
-            dc.isVoice = (0 != p.readInt());
+            voiceSettings = p.readInt();
+            dc.isVoice = (0 == voiceSettings) ? false : true;
 
             boolean isVideo = (0 != p.readInt());   // Samsung
             int call_type = p.readInt();            // Samsung CallDetails
@@ -252,12 +260,14 @@ public class SlteRIL extends RIL {
             if (RILJ_LOGV) {
                 riljLog("responseCallList dc.number=" + dc.number);
             }
-            dc.numberPresentation = DriverCall.presentationFromCLIP(p.readInt());
+			int np = p.readInt();
+            dc.numberPresentation = DriverCall.presentationFromCLIP(np);
             dc.name = p.readString();
             if (RILJ_LOGV) {
                 riljLog("responseCallList dc.name=" + dc.name);
             }
-            dc.namePresentation = p.readInt();
+            // according to ril.h, namePresentation should be handled as numberPresentation;
+            dc.namePresentation = DriverCall.presentationFromCLIP(p.readInt());
 
             int uusInfoPresent = p.readInt();
             if (uusInfoPresent == 1) {

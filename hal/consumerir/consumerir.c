@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 The Android Open Source Project
+ * Copyright (C) 2014 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,10 +15,15 @@
  */
 #define LOG_TAG "ConsumerIrHal"
 
+#include <stdlib.h>
+#include <malloc.h>
+#include <stdbool.h>
 #include <errno.h>
 #include <string.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include <pthread.h>
+#include <sched.h>
 #include <cutils/log.h>
 #include <hardware/hardware.h>
 #include <hardware/consumerir.h>
@@ -26,38 +31,67 @@
 #define ARRAY_SIZE(a) (sizeof(a) / sizeof(a[0]))
 
 static const consumerir_freq_range_t consumerir_freqs[] = {
-    {.min = 30000, .max = 30000},
-    {.min = 33000, .max = 33000},
-    {.min = 36000, .max = 36000},
-    {.min = 38000, .max = 38000},
-    {.min = 40000, .max = 40000},
-    {.min = 56000, .max = 56000},
+    {.min = 16000, .max = 60000},
 };
 
-int fd = 0;
+#define TMP_BUF_SIZE 80
+#define BUF_SIZE 4096
+
+pthread_mutex_t g_mtx;
+
 static int consumerir_transmit(struct consumerir_device *dev,
    int carrier_freq, int pattern[], int pattern_len)
 {
-    int strlen;
+    pthread_mutex_lock(&g_mtx);
+    char buf[BUF_SIZE];
+    char tmp[TMP_BUF_SIZE];
+    size_t buf_size = 0;
+    size_t tmp_size = 0;
+    int result = 0;
+    const char* delimiter;
+
+    memset(buf, 0, BUF_SIZE);
+
+    snprintf(buf, BUF_SIZE, "%d,", carrier_freq);
+    buf_size = strlen(buf);
     int i;
-    char buffer[1024];
-
-    memset(buffer, 0, 1024);
-
-    /* write the header */
-    strlen = sprintf(buffer, "%d,", carrier_freq);
-
-    /* write out the timing pattern */
-    for (i = 0; i < pattern_len; i++)
-    {
-        strlen += sprintf(buffer + strlen, "%d,", pattern[i]);
+    for (i = 0; i < pattern_len; ++i) {
+        delimiter = (i == pattern_len - 1) ? "" : ",";
+        snprintf(tmp, 80, "%d%s", pattern[i], delimiter);
+        tmp_size = strlen(tmp);
+        if (buf_size + tmp_size > BUF_SIZE) {
+            ALOGE("Error: too long pattern: %d, %zu symbols already", pattern_len, buf_size + tmp_size);
+            return -7;
+        }
+        strncat(buf, tmp, BUF_SIZE - buf_size);
+        buf_size += tmp_size;
     }
 
-    buffer[strlen - 1] = 0;
+    int tries = 10;
+    int fd = 0;
+    while (tries-- > 0) {
+        fd = open("/sys/class/sec/sec_ir/ir_send", O_RDWR);
+        int lasterr = errno;
+        if (fd >= 0)
+            break;
+        if (lasterr != 4) {
+            // may be need some timing
+            ALOGE("Failed to open device. %d - %s", lasterr, strerror(lasterr));
+            return -lasterr;
+        }
+        sched_yield();
+    }
 
-    write(fd, buffer, strlen - 1);
-
-    return 0;
+    if (write(fd, buf, buf_size) >= 0) {
+        result = 0;
+    } else { 
+        result = errno;
+        ALOGE("Failed to write. %d - %s", result, strerror(result));
+        result = -result;
+    }
+    close(fd);
+    pthread_mutex_unlock(&g_mtx);
+    return result;
 }
 
 static int consumerir_get_num_carrier_freqs(struct consumerir_device *dev)
@@ -78,7 +112,7 @@ static int consumerir_get_carrier_freqs(struct consumerir_device *dev,
 static int consumerir_close(hw_device_t *dev)
 {
     free(dev);
-    close(fd);
+    pthread_mutex_destroy(&g_mtx);
     return 0;
 }
 
@@ -88,6 +122,8 @@ static int consumerir_close(hw_device_t *dev)
 static int consumerir_open(const hw_module_t* module, const char* name,
         hw_device_t** device)
 {
+    pthread_mutex_init(&g_mtx, NULL);
+
     if (strcmp(name, CONSUMERIR_TRANSMITTER) != 0) {
         return -EINVAL;
     }
@@ -109,7 +145,6 @@ static int consumerir_open(const hw_module_t* module, const char* name,
     dev->get_carrier_freqs = consumerir_get_carrier_freqs;
 
     *device = (hw_device_t*) dev;
-    fd = open("/sys/class/sec/sec_ir/ir_send", O_RDWR);
     return 0;
 }
 

@@ -60,9 +60,7 @@ BOARD_GLOBAL_CFLAGS += -DCAMERA_SNUMINTS=$(BOARD_CAMERA_SNUMINTS)
 BOARD_KERNEL_BASE := 0x10000000
 BOARD_KERNEL_PAGESIZE := 2048
 TARGET_KERNEL_CONFIG := cyanogenmod_deathly_klimtlte_defconfig
-TARGET_KERNEL_SOURCE := kernel/samsung/tabs
-KERNEL_TOOLCHAIN := $(ANDROID_BUILD_TOP)/prebuilts/gcc/$(HOST_OS)-x86/arm/arm-cortex_a15-linux-gnueabihf-linaro_4.9/bin
-TARGET_KERNEL_CROSS_COMPILE_PREFIX := arm-eabi-
+TARGET_KERNEL_SOURCE := kernel/samsung/exynos5420
 
 # Charging mode
 BOARD_CHARGER_SHOW_PERCENTAGE := true

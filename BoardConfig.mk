@@ -31,9 +31,6 @@ TARGET_CPU_ABI2 := armeabi
 TARGET_CPU_SMP := true
 TARGET_CPU_VARIANT := cortex-a15
 
-# Vold
-TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/class/android_usb/android0/f_mass_storage/lun%d/file
-
 # RIL
 BOARD_PROVIDES_LIBRIL := true
 # hardware/samsung/ril

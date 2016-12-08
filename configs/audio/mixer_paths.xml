@@ -106,6 +106,7 @@
   <ctl name="Sub Mic Switch" value="0" />
   <ctl name="3rd Mic Switch" value="0" />
   <ctl name="Headset Mic Switch" value="0" />
+  <ctl name="AIF2 Mode" value="Master" />
 
   <path name="channel-left">
     <ctl name="AIF1TX1 Input 1" value="LHPF1" />
@@ -133,30 +134,7 @@
     <ctl name="ASRC1R Input" value="AIF1RX2" />
   </path>
 
-  <path name="verb-normal">
-    <ctl name="AIF2 Mode" value="Master" />
-    <ctl name="EPOUT DRE Switch" value="1" />
-    <ctl name="HPOUT1 DRE Switch" value="1" />
-    <ctl name="EPOUT Input 3" value="None" />
-    <ctl name="SPKOUTL Input 3" value="None" />
-    <ctl name="SPKOUTR Input 3" value="None" />
-    <ctl name="HPOUT1L Input 2" value="None" />
-    <ctl name="HPOUT1R Input 2" value="None" />
-  </path>
-
-  <path name="verb-voicecall">
-    <ctl name="AIF2 Mode" value="Slave" />
-    <ctl name="EPOUT DRE Switch" value="0" />
-    <ctl name="HPOUT1 DRE Switch" value="0" />
-    <ctl name="EPOUT Input 3" value="ASRC2L" />
-    <ctl name="SPKOUTL Input 3" value="ASRC2L" />
-    <ctl name="SPKOUTR Input 3" value="ASRC2R" />
-    <ctl name="HPOUT1L Input 2" value="ASRC2L" />
-    <ctl name="HPOUT1R Input 2" value="ASRC2R" />
-  </path>
-
   <path name="speaker">
-    <path name="verb-normal" />
     <ctl name="SPK Switch" value="1" />
     <ctl name="Speaker Digital Volume" value="122" />
     <ctl name="SPKOUTL Input 1 Volume" value="31" />
@@ -164,7 +142,6 @@
   </path>
 
   <path name="earpiece">
-    <path name="verb-normal" />
     <ctl name="RCV Switch" value="1" />
     <ctl name="EPOUT Digital Volume" value="108" />
     <ctl name="EPOUT Input 1 Volume" value="32" />
@@ -172,7 +149,6 @@
   </path>
 
   <path name="headphones">
-    <path name="verb-normal" />
     <ctl name="Output Compensation Switch" value="1" />
     <ctl name="HP Switch" value="1" />
     <ctl name="Noise Gate Switch" value="0" />
@@ -182,7 +158,6 @@
   </path>
 
   <path name="bt-sco">
-    <path name="verb-normal" />
     <ctl name="ASRC1L Input" value="AIF1RX1" />
     <ctl name="ASRC1R Input" value="AIF1RX2" />
     <ctl name="AIF3TX1 Input 1" value="ASRC1L" />
@@ -204,7 +179,6 @@
   </path>
 
   <path name="analog-dock">
-    <path name="verb-normal" />
     <ctl name="VPS Switch" value="1" />
     <ctl name="OUT2 Digital Volume" value="124" />
     <ctl name="HPOUT2L Input 1 Volume" value="32" />
@@ -212,13 +186,11 @@
   </path>
 
   <path name="aux-digital">
-    <path name="verb-normal" />
     <ctl name="HDMI Switch" value="1" />
   </path>
 
   <path name="main-mic">
     <path name="channel-left" />
-    <path name="verb-voicecall" />
 
     <ctl name="Sub Mic Switch" value="1" />
     <ctl name="SPKOUTL Input 4" value="None" />
@@ -237,7 +209,6 @@
 
   <path name="second-mic">
     <path name="channel-right" />
-    <path name="verb-voicecall" />
     <ctl name="Sub Mic Switch" value="1" />
     <ctl name="LHPF2 Input 1" value="IN2L" />
     <ctl name="AIF2TX1 Input 1" value="ASRC1L" />
@@ -253,7 +224,6 @@
 
   <path name="headset-mic">
     <path name="channel-left" />
-    <path name="verb-voicecall" />
     <ctl name="Headset Mic Switch" value="1" />
     <ctl name="HPOUT1L Input 3" value="None" />
     <ctl name="HPOUT1R Input 3" value="None" />
@@ -267,7 +237,6 @@
 
   <path name="bt-sco-hs-mic">
     <path name="channel-none" />
-    <path name="verb-voicecall" />
     <ctl name="AIF2TX1 Input 2" value="AIF3RX1" />
     <ctl name="AIF2TX2 Input 2" value="AIF3RX2" />
     <ctl name="ASRC2L Input" value="AIF3RX1" />

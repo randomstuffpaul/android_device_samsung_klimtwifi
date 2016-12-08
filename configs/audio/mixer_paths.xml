@@ -47,7 +47,6 @@
   <ctl name="AIF1TX2 Input 2" value="ASRC2R" />
   <ctl name="LHPF1 COEFF FILTER" value="130Hz" />
   <ctl name="LHPF2 COEFF FILTER" value="130Hz" />
-  <ctl name="Output Compensation Coefficient" value="09 00" />
   <ctl name="AIF1TX1 Input 1 Volume" value="32" />
   <ctl name="AIF1TX1 Input 2 Volume" value="32" />
   <ctl name="AIF1TX1 Input 3 Volume" value="32" />
@@ -149,7 +148,6 @@
   </path>
 
   <path name="headphones">
-    <ctl name="Output Compensation Switch" value="1" />
     <ctl name="HP Switch" value="1" />
     <ctl name="Noise Gate Switch" value="0" />
     <ctl name="HPOUT1 Digital Volume" value="115" />

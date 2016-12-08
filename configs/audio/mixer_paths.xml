@@ -135,24 +135,15 @@
 
   <path name="speaker">
     <ctl name="SPK Switch" value="1" />
-    <ctl name="Speaker Digital Volume" value="122" />
-    <ctl name="SPKOUTL Input 1 Volume" value="31" />
-    <ctl name="SPKOUTR Input 1 Volume" value="30" />
   </path>
 
   <path name="earpiece">
     <ctl name="RCV Switch" value="1" />
-    <ctl name="EPOUT Digital Volume" value="108" />
-    <ctl name="EPOUT Input 1 Volume" value="32" />
-    <ctl name="EPOUT Input 2 Volume" value="32" />
   </path>
 
   <path name="headphones">
     <ctl name="HP Switch" value="1" />
     <ctl name="Noise Gate Switch" value="0" />
-    <ctl name="HPOUT1 Digital Volume" value="115" />
-    <ctl name="HPOUT1L Input 1 Volume" value="32" />
-    <ctl name="HPOUT1R Input 1 Volume" value="32" />
   </path>
 
   <path name="bt-sco">
@@ -162,10 +153,6 @@
     <ctl name="AIF3TX2 Input 1" value="ASRC1R" />
     <ctl name="AIF3TX1 Input 2" value="AIF2RX1" />
     <ctl name="AIF3TX2 Input 2" value="AIF2RX2" />
-    <ctl name="AIF3TX1 Input 1 Volume" value="32" />
-    <ctl name="AIF3TX1 Input 2 Volume" value="32" />
-    <ctl name="AIF3TX2 Input 1 Volume" value="32" />
-    <ctl name="AIF3TX2 Input 2 Volume" value="32" />
   </path>
 
   <path name="bt-sco-hs">
@@ -178,9 +165,6 @@
 
   <path name="analog-dock">
     <ctl name="VPS Switch" value="1" />
-    <ctl name="OUT2 Digital Volume" value="124" />
-    <ctl name="HPOUT2L Input 1 Volume" value="32" />
-    <ctl name="HPOUT2R Input 1 Volume" value="32" />
   </path>
 
   <path name="aux-digital">
@@ -196,9 +180,6 @@
     <ctl name="LHPF1 Input 1" value="IN2L" />
     <ctl name="AIF2TX1 Input 1" value="ASRC1L" />
     <ctl name="AIF2TX2 Input 1" value="ASRC1R" />
-    <ctl name="IN2L Volume" value="24" />
-    <ctl name="IN2L Digital Volume" value="128" />
-    <ctl name="LHPF1 Input 1 Volume" value="32" />
   </path>
 
   <path name="builtin-mic">
@@ -211,9 +192,6 @@
     <ctl name="LHPF2 Input 1" value="IN2L" />
     <ctl name="AIF2TX1 Input 1" value="ASRC1L" />
     <ctl name="AIF2TX2 Input 1" value="ASRC1R" />
-    <ctl name="IN2L Volume" value="29" />
-    <ctl name="IN2L Digital Volume" value="128" />
-    <ctl name="LHPF2 Input 1 Volume" value="32" />
   </path>
 
   <path name="back-mic">
@@ -228,9 +206,6 @@
     <ctl name="LHPF1 Input 1" value="IN1R" />
     <ctl name="AIF2TX1 Input 1" value="ASRC1L" />
     <ctl name="AIF2TX2 Input 1" value="ASRC1R" />
-    <ctl name="IN1R Volume" value="27" />
-    <ctl name="IN1R Digital Volume" value="128" />
-    <ctl name="LHPF1 Input 1 Volume" value="32" />
   </path>
 
   <path name="bt-sco-hs-mic">
@@ -275,59 +250,31 @@
 
   <path name="voice-speaker">
     <path name="speaker" />
-    <ctl name="Speaker Digital Volume" value="127" />
-    <ctl name="SPKOUTL Input 1 Volume" value="32" />
-    <ctl name="SPKOUTR Input 1 Volume" value="32" />
-    <ctl name="SPKOUTL Input 3 Volume" value="32" />
-    <ctl name="SPKOUTR Input 3 Volume" value="32" />
   </path>
 
   <path name="voice-earpiece">
     <path name="earpiece" />
-    <ctl name="EPOUT Digital Volume" value="128" />
-    <ctl name="EPOUT Input 1 Volume" value="32" />
-    <ctl name="EPOUT Input 2 Volume" value="32" />
-    <ctl name="EPOUT Input 3 Volume" value="32" />
-    <ctl name="EPOUT Input 4 Volume" value="32" />
   </path>
 
   <path name="voice-headphones">
     <path name="headphones" />
     <ctl name="Noise Gate Switch" value="0" />
-    <ctl name="HPOUT1 Digital Volume" value="118" />
-    <ctl name="HPOUT1L Input 1 Volume" value="32" />
-    <ctl name="HPOUT1R Input 1 Volume" value="32" />
-    <ctl name="HPOUT1L Input 2 Volume" value="32" />
-    <ctl name="HPOUT1R Input 2 Volume" value="32" />
   </path>
 
   <path name="voice-bt-sco">
     <path name="bt-sco" />
-    <ctl name="AIF3TX1 Input 1 Volume" value="32" />
-    <ctl name="AIF3TX1 Input 2 Volume" value="32" />
-    <ctl name="AIF3TX2 Input 1 Volume" value="32" />
-    <ctl name="AIF3TX2 Input 2 Volume" value="32" />
   </path>
 
   <path name="voice-main-mic">
     <path name="main-mic" />
-    <ctl name="IN2L Volume" value="24" />
-    <ctl name="IN2L Digital Volume" value="128" />
-    <ctl name="LHPF1 Input 1 Volume" value="32" />
   </path>
 
   <path name="voice-second-mic">
     <path name="second-mic" />
-    <ctl name="IN2L Volume" value="29" />
-    <ctl name="IN2L Digital Volume" value="128" />
-    <ctl name="LHPF2 Input 1 Volume" value="32" />
   </path>
 
   <path name="voice-headset-mic">
     <path name="headset-mic" />
-    <ctl name="IN1R Volume" value="27" />
-    <ctl name="IN1R Digital Volume" value="128" />
-    <ctl name="LHPF1 Input 1 Volume" value="32" />
   </path>
 
   <path name="voice-bt-sco-hs-mic">
@@ -344,23 +291,14 @@
 
   <path name="voice-rec-main-mic">
     <path name="main-mic" />
-    <ctl name="IN2L Volume" value="42" />
-    <ctl name="IN2L Digital Volume" value="135" />
-    <ctl name="LHPF1 Input 1 Volume" value="32" />
   </path>
 
   <path name="voice-rec-second-mic">
     <path name="second-mic" />
-    <ctl name="IN2L Volume" value="40" />
-    <ctl name="IN2L Digital Volume" value="128" />
-    <ctl name="LHPF2 Input 1 Volume" value="32" />
   </path>
 
   <path name="voice-rec-headset-mic">
     <path name="headset-mic" />
-    <ctl name="IN1R Volume" value="39" />
-    <ctl name="IN1R Digital Volume" value="141" />
-    <ctl name="LHPF1 Input 1 Volume" value="32" />
   </path>
 
   <path name="voice-rec-bt-sco-hs-mic">
@@ -370,53 +308,31 @@
 
   <path name="communication-speaker">
     <path name="speaker" />
-    <ctl name="Speaker Digital Volume" value="121" />
-    <ctl name="SPKOUTL Input 1 Volume" value="31" />
-    <ctl name="SPKOUTR Input 1 Volume" value="31" />
   </path>
 
   <path name="communication-earpiece">
     <path name="earpiece" />
-    <ctl name="EPOUT Digital Volume" value="120" />
-    <ctl name="EPOUT Input 1 Volume" value="28" />
-    <ctl name="EPOUT Input 2 Volume" value="28" />
   </path>
 
   <path name="communication-headphones">
     <path name="headphones" />
     <ctl name="Noise Gate Switch" value="0" />
-    <ctl name="HPOUT1 Digital Volume" value="110" />
-    <ctl name="HPOUT1L Input 1 Volume" value="32" />
-    <ctl name="HPOUT1R Input 1 Volume" value="32" />
   </path>
 
   <path name="communication-bt-sco">
     <path name="bt-sco" />
-    <ctl name="AIF3TX1 Input 1 Volume" value="32" />
-    <ctl name="AIF3TX1 Input 2 Volume" value="32" />
-    <ctl name="AIF3TX2 Input 1 Volume" value="32" />
-    <ctl name="AIF3TX2 Input 2 Volume" value="32" />
   </path>
 
   <path name="communication-main-mic">
     <path name="main-mic" />
-    <ctl name="IN2L Volume" value="40" />
-    <ctl name="IN2L Digital Volume" value="128" />
-    <ctl name="LHPF1 Input 1 Volume" value="32" />
   </path>
 
   <path name="communication-second-mic">
     <path name="second-mic" />
-    <ctl name="IN2L Volume" value="40" />
-    <ctl name="IN2L Digital Volume" value="128" />
-    <ctl name="LHPF2 Input 1 Volume" value="32" />
   </path>
 
   <path name="communication-headset-mic">
     <path name="headset-mic" />
-    <ctl name="IN1R Volume" value="40" />
-    <ctl name="IN1R Digital Volume" value="128" />
-    <ctl name="LHPF1 Input 1 Volume" value="32" />
   </path>
 
   <path name="communication-bt-sco-hs-mic">
